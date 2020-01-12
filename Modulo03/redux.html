@@ -19,6 +19,7 @@
 
     // Action -> modificar state -> Atualizar os componentes
 
+    // ESTADOS REDUX
     const estadoInicial = {
       contador: 0
     }
@@ -31,6 +32,7 @@
       type: 'DECREMENTA_CONTADOR'
     }
 
+    // REDUCER CONTEM A LÓGICA DE NEGÓCIO
     const reducer = (state = estadoInicial, action) => {
       if (action.type === 'INCREMENTA_CONTADOR') {
         return {
@@ -43,6 +45,7 @@
       }
     }
 
+    // CHAMADANDO O REDUCER
     const store = Redux.createStore(reducer)
 
     store.subscribe(() => {
