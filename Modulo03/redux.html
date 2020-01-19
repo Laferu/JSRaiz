@@ -21,7 +21,8 @@
 
     // ESTADOS REDUX
     const estadoInicial = {
-      contador: 0
+      contador: 0,
+      menuAberto: false
     }
 
     const incrementar = {
@@ -32,16 +33,53 @@
       type: 'DECREMENTA_CONTADOR'
     }
 
-    // REDUCER CONTEM A LÓGICA DE NEGÓCIO
+    // QUEBRANDO O REDUCER COM A REGRA DE NEGÓCIO
+    const contadorReducer = (state, action) => {
+      switch(action.type){
+        case 'INCREMENTA_CONTADOR':
+          return {
+            ...state,
+            contador: state.contador + 1
+          }
+        case 'DECREMENTA_CONTADOR':
+          return {
+            ...state,
+            contador: state.contador - 1
+          }
+        default:
+          return state
+      }
+    }
+
+    const menuReducer = (state, action) => {
+      switch(action.type){
+        case 'ABRIR_MENU':
+          return {
+            ...state,
+            menuAberto: true
+          }
+        case 'FECHAR_MENU':
+          return {
+            ...state,
+            menuAberto: false
+          }
+        default:
+          return state
+      }
+    }
+
+    // REDUCER CONTEM A LÓGICA DE NEGÓCIO(não mais)
     const reducer = (state = estadoInicial, action) => {
-      if (action.type === 'INCREMENTA_CONTADOR') {
-        return {
-          contador: state.contador + 1
-        }
-      } else if (action.type === 'DECREMENTA_CONTADOR') {
-        return {
-          contador: state.contador - 1
-        }
+
+      switch(action.type){
+        case 'INCREMENTA_CONTADOR':
+        case 'DECREMENTA_CONTADOR':
+          return contadorReducer(state, action)
+        case 'ABRIR_MENU':
+        case 'FECHAR_MENU':
+          return menuReducer(state, action)
+        default:
+          return state
       }
     }
 
@@ -57,6 +95,14 @@
     store.dispatch(incrementar)
     store.dispatch(incrementar)
     store.dispatch(decrementar)
+
+    store.dispatch({
+      type: 'ABRIR_MENU'
+    })
+
+    store.dispatch({
+      type: 'FECHAR_MENU'
+    })
   </script>
 </body>
 </html>
