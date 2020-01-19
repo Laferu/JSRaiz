@@ -19,12 +19,6 @@
 
     // Action -> modificar state -> Atualizar os componentes
 
-    // ESTADOS REDUX
-    const estadoInicial = {
-      contador: 0,
-      menuAberto: false
-    }
-
     const incrementar = {
       type: 'INCREMENTA_CONTADOR'
     }
@@ -33,8 +27,8 @@
       type: 'DECREMENTA_CONTADOR'
     }
 
-    // QUEBRANDO O REDUCER COM A REGRA DE NEGÓCIO
-    const contadorReducer = (state, action) => {
+    // QUEBRANDO O REDUCER COM A REGRA DE NEGÓCIO(e agora com o estado inicial)
+    const contadorReducer = (state = { contador: 0 }, action) => {
       switch(action.type){
         case 'INCREMENTA_CONTADOR':
           return {
@@ -46,12 +40,22 @@
             ...state,
             contador: state.contador - 1
           }
+        case 'ABRIR_MENU':
+          return {
+            ...state,
+            contador: 0
+          }
+        case 'FECHAR_MENU':
+          return {
+            ...state,
+            contador: 10
+          }
         default:
           return state
       }
     }
 
-    const menuReducer = (state, action) => {
+    const menuReducer = (state = { menuAberto: false }, action) => {
       switch(action.type){
         case 'ABRIR_MENU':
           return {
@@ -68,23 +72,14 @@
       }
     }
 
-    // REDUCER CONTEM A LÓGICA DE NEGÓCIO(não mais)
-    const reducer = (state = estadoInicial, action) => {
-
-      switch(action.type){
-        case 'INCREMENTA_CONTADOR':
-        case 'DECREMENTA_CONTADOR':
-          return contadorReducer(state, action)
-        case 'ABRIR_MENU':
-        case 'FECHAR_MENU':
-          return menuReducer(state, action)
-        default:
-          return state
-      }
-    }
+    // COMBINANDO REDUCERS E ELIMINANDO A FUNÇÃO INTERMEDIÁRIA
+    const rootReducer = Redux.combineReducers({
+      contador: contadorReducer,
+      menu: menuReducer
+    })
 
     // CHAMADANDO O REDUCER
-    const store = Redux.createStore(reducer)
+    const store = Redux.createStore(rootReducer)
 
     store.subscribe(() => {
       console.log(store.getState())
