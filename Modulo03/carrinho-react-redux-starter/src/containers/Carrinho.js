@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import CarrinhoComponent from '../Components/Carrinho'
-import { Creators } from '../ducks/carrinho'
+import { Creators, Selectors as carrinhoSelectors } from '../ducks/carrinho'
 
 const mapStateToProps = state => {
   return {
-    itens: state.carrinhoItens
+    itens: carrinhoSelectors.getItens(state)
   }
 }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import CardComponent from '../Components/Card'
 import { Creators as carrinhoCreators } from '../ducks/carrinho'
+import { Selectors as produtosSelector } from '../ducks/produtos'
 
 const ListaProdutos = props => (
   <div className='row'>
@@ -16,7 +17,7 @@ const ListaProdutos = props => (
 )
 
 const mapStateToProps = state => ({
-  itens: state.produtos
+  itens: produtosSelector.getProdutos(state)
 })
 
 const mapDispatchToProps = dispatch => ({

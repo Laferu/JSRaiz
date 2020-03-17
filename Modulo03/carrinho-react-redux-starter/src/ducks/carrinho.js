@@ -54,4 +54,10 @@ export const Creators = {
   removeItem
 }
 
+const getItens = state => state.carrinhoItens
+
+export const Selectors = {
+  getItens
+}
+
 export default reducer
