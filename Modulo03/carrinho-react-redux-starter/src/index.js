@@ -1,20 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import AppComponent from './App'
-import { createStore, combineReducers } from 'redux'
+import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import carrinhoReducers from './reducers'
-
-import produtosMock from '../data'
-
-const produtosReducer = (state = produtosMock, action) => {
-  return state
-}
-
-const rootReducers = combineReducers({
-  produtos: produtosReducer,
-  carrinhoItens: carrinhoReducer
-})
+import rootReducers from './ducks'
 
 const store = createStore(
   rootReducers,

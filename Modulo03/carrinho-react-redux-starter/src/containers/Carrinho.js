@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import CarrinhoComponent from '../Components/Carrinho'
-import { removeItem } from '../actions'
+import { Creators } from '../ducks/carrinho'
 
 const mapStateToProps = state => {
   return {
@@ -10,7 +10,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onClick (itemId) {
-    dispatch(removeItem(itemId))
+    dispatch(Creators.removeItem(itemId))
   }
 })
 

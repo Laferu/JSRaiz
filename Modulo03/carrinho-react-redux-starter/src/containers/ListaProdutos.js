@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import CardComponent from '../Components/Card'
-import { addItem } from '../actions'
+import { Creators as carrinhoCreators } from '../ducks/carrinho'
 
 const ListaProdutos = props => (
   <div className='row'>
@@ -21,7 +21,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClick: item => {
-    dispatch(addItem(item))
+    dispatch(carrinhoCreators.addItem(item))
   }
 })
 
