@@ -4,7 +4,7 @@ import { removeItem } from '../actions'
 
 const mapStateToProps = state => {
   return {
-    itens: state
+    itens: state.carrinhoItens
   }
 }
 

@@ -1,11 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import AppComponent from './App'
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import reducers from './reducers'
+import carrinhoReducers from './reducers'
 
-const store = createStore(reducers)
+import produtosMock from '../data'
+
+const produtosReducer = (state = produtosMock, action) => {
+  return state
+}
+
+const rootReducers = combineReducers({
+  produtos: produtosReducer,
+  carrinhoItens: carrinhoReducer
+})
+
+const store = createStore(
+  rootReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 ReactDOM.render(
   <Provider store={store}>

@@ -13,7 +13,7 @@ const reducer = (state = {}, action) => {
         ? Object.keys(state).reduce((acc, produtoId) => {
           return {
             ...acc,
-            ...( produtoId === action.payload.id || { [produtoId]: state[produtoId] } )
+            ...(produtoId === action.payload.id || { [produtoId]: state[produtoId] })
           }
         }, {})
         : {
