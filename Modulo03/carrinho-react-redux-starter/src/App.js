@@ -1,26 +1,17 @@
-import React from 'react';
-import produtosLista from './data';
-import ProdutoComponent from './Components/Produto';
-import ListaProdutosComponent from './Components/ListaProdutos';
-import CarrinhoComponent from './Components/Carrinho';
+import React from 'react'
+import ListaProdutos from './containers/ListaProdutos'
+import CarrinhoComponent from './containers/Carrinho'
 
 const AppComponent = () => {
   return (
-    <React.Fragment>
-      <div className="col-sm-8">
-        <ListaProdutosComponent>
-          {produtosLista.map((produto, index) => (
-            <ProdutoComponent
-              item={produto}
-              key={`produto-${index}`}
-            />
-          ))}
-        </ListaProdutosComponent>
+    <>
+      <div className='col-sm-8'>
+        <ListaProdutos />
       </div>
-      <div className="col-sm-4">
+      <div className='col-sm-4'>
         <CarrinhoComponent />
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

@@ -5,11 +5,11 @@ export const addItem = produto => {
   }
 }
 
-export const removeItem = produtoId => {
+export const removeItem = itemId => {
   return {
     type: 'REMOVE_ITEM',
     payload: {
-      id: produtoId
+      id: itemId
     }
   }
 }
