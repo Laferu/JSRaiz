@@ -8,25 +8,33 @@ import {
 } from '../ducks/produtos'
 
 const ListaProdutos = props => {
+  // console.log(props.loading)
   useEffect(() => {
     props.buscaProdutos()
   }, [])
 
   return (
     <div className='row'>
-      {props.itens.map((produto, index) => (
-        <CardComponent
-          item={produto}
-          onClick={props.onClick}
-          key={`produto-${index}`}
-        />
-      ))}
+      {
+        props.loading
+          ? (
+            <strong>Carregando...</strong>
+          )
+          : props.itens.map((produto, index) => (
+            <CardComponent
+              item={produto}
+              onClick={props.onClick}
+              key={`produto-${index}`}
+            />
+          ))
+      }
     </div>
   )
 }
 
 const mapStateToProps = state => ({
-  itens: produtosSelector.getProdutos(state)
+  itens: produtosSelector.getProdutos(state),
+  loading: produtosSelector.isLoading(state)
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -1,19 +1,25 @@
-import produtosMock from '../data'
-
 const Types = {
-  DONE: 'PRODUTOS_DONE'
+  DONE: 'PRODUTOS_DONE',
+  INIT: 'PRODUTOS_INIT'
 }
+
+const produtosFinalizado = payload => ({
+  type: Types.DONE,
+  payload
+})
+
+const produtosInicializando = payload => ({
+  type: Types.INIT
+})
 
 const buscaProdutos = () => {
   return dispatch => {
+    dispatch(produtosInicializando())
     window
       .fetch('http://localhost:3000/produtos')
       .then(data => data.json())
       .then(produtos => {
-        dispatch({
-          type: Types.DONE,
-          payload: produtos
-        })
+        dispatch(produtosFinalizado(produtos))
       })
   }
 }
@@ -25,9 +31,15 @@ export const Operations = {
 const produtosReducer = (state = { data: [] }, action) => {
   console.log(action.payload)
   switch (action.type) {
+    case Types.INIT:
+      return {
+        ...state,
+        loading: true
+      }
     case Types.DONE:
       return {
         ...state,
+        loading: false,
         data: action.payload.data
       }
     default:
@@ -37,8 +49,11 @@ const produtosReducer = (state = { data: [] }, action) => {
 
 const getProdutos = state => state.produtos.data
 
+const isLoading = state => state.produtos.loading
+
 export const Selectors = {
-  getProdutos
+  getProdutos,
+  isLoading
 }
 
 export default produtosReducer
