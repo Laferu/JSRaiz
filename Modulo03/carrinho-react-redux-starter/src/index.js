@@ -8,14 +8,14 @@ import rootReducers from './ducks'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const soma = (a, b) => a + b
-const decrementa5 = valor => valor - 5
+// const soma = (a, b) => a + b
+// const decrementa5 = valor => valor - 5
 
-const parOuImpar = valor => valor % 2 === 0 ? 'par' : 'impar'
+// const parOuImpar = valor => valor % 2 === 0 ? 'par' : 'impar'
 
-const novaFuncao = compose(parOuImpar, decrementa5, soma)
+// const novaFuncao = compose(parOuImpar, decrementa5, soma)
 
-console.log(novaFuncao(12, 5))
+// console.log(nova0Funcao(12, 5))
 
 const store = createStore(
   rootReducers,
