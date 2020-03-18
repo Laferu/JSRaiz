@@ -1,19 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import AppComponent from './App'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import rootReducers from './ducks'
 
-const meuMiddleware = store => next => action => {
-  console.log(store, next, action)
-  next(action)
-}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const soma = (a, b) => a + b
+const decrementa5 = valor => valor - 5
+
+const parOuImpar = valor => valor % 2 === 0 ? 'par' : 'impar'
+
+const novaFuncao = compose(parOuImpar, decrementa5, soma)
+
+console.log(novaFuncao(12, 5))
 
 const store = createStore(
   rootReducers,
-  applyMiddleware(thunk)
+  composeEnhancers(
+    applyMiddleware(thunk)
+  )
   // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
